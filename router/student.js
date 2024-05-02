@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
+const Student = require('../model/student')
 
 router.get('/',(req,res)=>{
     res.status(200).json({
@@ -18,7 +20,28 @@ router.get('/getAll',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-    console.log("post new data request")
+    const newStudent = new Student({
+        _id:new mongoose.Types.ObjectId,
+        mhyme:req.body.name,
+        phone:req.body.phone,
+        add:req.body.add,
+        batch:req.body.batch,
+        reggNo:req.body.reggNo
+    })
+
+    newStudent.save()
+    .then(result=>{
+       console.log(result) 
+       res.status(200).json({
+        new_student:result
+       })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({
+            error:err
+        })
+    })
 })
 
 
