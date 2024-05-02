@@ -22,7 +22,7 @@ router.get('/getAll',(req,res)=>{
 router.post('/',(req,res)=>{
     const newStudent = new Student({
         _id:new mongoose.Types.ObjectId,
-        mhyme:req.body.name,
+        name:req.body.name,
         phone:req.body.phone,
         add:req.body.add,
         batch:req.body.batch,
